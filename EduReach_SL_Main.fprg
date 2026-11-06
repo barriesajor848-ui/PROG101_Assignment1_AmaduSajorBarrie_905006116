@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flowgorithm fileversion="2.18">
+  <attributes>
+    <attribute name="name" value="EduReach SL Main Menu"/>
+    <attribute name="authors" value="Abubakar Jalloh"/>
+    <attribute name="about" value="PROG101 EduReach SL main menu and lesson lookup"/>
+  </attributes>
+  <function name="Main" type="None" variable="">
+    <parameters/>
+    <body>
+      <declare name="choice" type="Integer" array="False" size=""/>
+      <declare name="subject, topic" type="String" array="False" size=""/>
+      <declare name="running" type="Boolean" array="False" size=""/>
+      <assign variable="running" expression="True"/>
+      <while expression="running = True">
+        <output expression="&quot;EDUREACH SL - MAIN MENU&quot;" newline="True"/>
+        <output expression="&quot;1. View Lesson  2. Take Quiz  3. Exit&quot;" newline="True"/>
+        <input variable="choice"/>
+        <if expression="choice = 1">
+          <then>
+            <output expression="&quot;Enter subject:&quot;" newline="True"/>
+            <input variable="subject"/>
+            <output expression="&quot;Enter topic:&quot;" newline="True"/>
+            <input variable="topic"/>
+            <if expression="subject = &quot;Mathematics&quot; and topic = &quot;Fractions&quot;">
+              <then><output expression="&quot;Lesson found: Fractions - parts of a whole.&quot;" newline="True"/></then>
+              <else><output expression="&quot;Lesson not available offline. Try another topic.&quot;" newline="True"/></else>
+            </if>
+          </then>
+          <else>
+            <if expression="choice = 2">
+              <then><call expression="TakeQuiz()"/></then>
+              <else>
+                <if expression="choice = 3">
+                  <then><assign variable="running" expression="False"/></then>
+                  <else><output expression="&quot;Invalid menu choice. Try again.&quot;" newline="True"/></else>
+                </if>
+              </else>
+            </if>
+          </else>
+        </if>
+      </while>
+      <output expression="&quot;Thank you for using EduReach SL.&quot;" newline="True"/>
+    </body>
+  </function>
+  <function name="TakeQuiz" type="None" variable="">
+    <parameters/>
+    <body>
+      <declare name="answer, correct, total, i" type="Integer" array="False" size=""/>
+      <declare name="percentage" type="Real" array="False" size=""/>
+      <assign variable="correct" expression="0"/>
+      <assign variable="total" expression="3"/>
+      <assign variable="i" expression="1"/>
+      <while expression="i &lt;= total">
+        <if expression="i = 1">
+          <then><output expression="&quot;Q1: 1/2 + 1/2 = ? (1 = 1, 2 = 2)&quot;" newline="True"/></then>
+          <else>
+            <if expression="i = 2">
+              <then><output expression="&quot;Q2: 3/4 is greater than 1/2? (1 = Yes, 2 = No)&quot;" newline="True"/></then>
+              <else><output expression="&quot;Q3: 1/4 + 1/4 = 1/2? (1 = Yes, 2 = No)&quot;" newline="True"/></else>
+            </if>
+          </else>
+        </if>
+        <input variable="answer"/>
+        <while expression="answer != 1 and answer != 2">
+          <output expression="&quot;Invalid answer. Enter 1 or 2.&quot;" newline="True"/>
+          <input variable="answer"/>
+        </while>
+        <if expression="answer = 1">
+          <then><assign variable="correct" expression="correct + 1"/></then>
+          <else><output expression="&quot;Incorrect answer.&quot;" newline="True"/></else>
+        </if>
+        <assign variable="i" expression="i + 1"/>
+      </while>
+      <assign variable="percentage" expression="correct * 100.0 / total"/>
+      <output expression="&quot;Correct answers: &quot; &amp; correct" newline="True"/>
+      <output expression="&quot;Score (%): &quot; &amp; percentage" newline="True"/>
+      <if expression="percentage &gt;= 50">
+        <then><output expression="&quot;Good work! Keep practising.&quot;" newline="True"/></then>
+        <else><output expression="&quot;Review the lesson and try again.&quot;" newline="True"/></else>
+      </if>
+    </body>
+  </function>
+</flowgorithm>
